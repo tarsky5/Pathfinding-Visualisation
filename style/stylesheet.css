@@ -1,0 +1,259 @@
+button, input[type="submit"], input[type="reset"] {
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
+
+@font-face {
+    font-family: 'ReemKufi';
+    font-display: swap;
+    src: url(../fonts/Reem_Kufi/ReemKufi-VariableFont_wght.ttf);
+}
+
+body{
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    background-color: #29262a;
+    color: #fdfdfd;
+    font-family: "ReemKufi";
+    overflow: hidden;
+    font-size: 1vw;
+    
+}
+
+h1{
+    margin: 0;
+}
+
+#header{
+    background-color: #29262a;
+    font-family: "ReemKufi";
+    letter-spacing: 0.10em;
+    height:15%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.spechar{
+    color: #F1F224;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 768px) {
+    #header{
+        font-size: 2em;
+    }
+}
+
+
+#meta-wrap{
+    display: flex;
+    height:70%;
+    width: 90%;
+    margin: 0 auto;
+}
+
+#wrapper1, #wrapper2{
+    height: 100%;
+    width: 50%;
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: 50%;
+    filter: none;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 768px) {
+    #meta-wrap{
+        flex-direction: column;
+    }
+    #wrapper1, #wrapper2{
+        height: 50%;
+        width: 100%;
+        flex-basis: 50%;
+    }
+}
+
+.text_middle{
+    opacity: 0;
+    position: absolute;
+    text-align: center;
+    width: 45%;
+    height: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 250ms opacity ease;
+    z-index: -1;
+}
+
+#middle_text-2{
+    margin-left: 45%;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 768px) {
+    .text_middle{
+        width: 100%;
+        height: 35%;
+        font-size: 2.5em;
+    }
+    #middle_text-2{
+        margin-left: 0%;
+        top:50%;
+    }
+}
+
+.text_hovercap{
+    width: 70%;
+    height: 70%;
+    font-size: 200%;
+    text-align: center;
+}
+
+#control_panel{
+    background-color: #29262a;
+    height:15%;
+    width: 100%;
+    display: flex;
+}
+
+#change_button, #start_button{
+    height: 100%;
+    width: 50%;
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#change_button > button, #start_button > button {
+    height: 50%;
+    width: 30%;
+    font-family: "ReemKufi";
+    border: solid 2px #F1F224;
+    font-size: 1.2em;
+    background-color:#F1F224;
+    border-radius: 20px;
+    transition: 250ms background-color ease, 250ms color ease;
+    color: #29262a;
+}
+
+#change_button > button {
+    margin-left: 60%;
+}
+
+#change_button > button::after {
+    content: "Generate New Graph";
+}
+
+#start_button > button {
+    margin-right: 60%;
+}
+
+#start_button > button::after {
+    content: "Start Pathfinding";
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 768px) {
+    #change_button > button::after {
+        content: "Graph";
+    }
+    
+    #start_button > button::after {
+        content: "Start";
+    }
+    
+    #change_button > button, #start_button > button {
+        font-size: 3em;
+    }
+
+
+    
+}
+
+#change_button > button:hover, #start_button > button:hover {
+    background-color:#29262a;
+    color: #fdfdfd;
+}
+
+.git-link{
+    position: absolute;
+    left: 2%;
+    top: 90%;
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none; /* no underline */
+}
+
+.git-link:hover{
+    color: #F1F224;
+    cursor: pointer;
+}
+
+.git-text{
+    text-align: center;
+    font-size: 1em;
+    float: right;
+    width: 80%;
+    color: #fdfdfd;
+}
+
+.git-text::after{
+    content: "https://github.com/iptv-org/iptv";
+}
+
+.git-img {
+    float: left;
+    width: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 3%;
+}
+.git-img > img{
+    width: 100%;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 768px) {
+
+    .git-link{
+        position: absolute;
+        left: 8%;
+        top: 90%;
+        width: 20%;
+        justify-content:left;
+    }
+
+    .git-text{
+        width: 0%;
+        float: none;
+    }
+
+    .git-text::after{
+        content: none;
+    }
+    
+    .git-img {
+        width: 20%;
+        margin-right: 0%;
+        float: left;
+    }
+    .git-img > img{
+        width: 7em;
+    }
+}

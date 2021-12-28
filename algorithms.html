@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>
+        Algorithms Visualisation
+    </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densityDpi=device-dpi" />
+    <script src="https://cdn.anychart.com/releases/8.9.0/js/anychart-core.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.9.0/js/anychart-graph.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.9.0/js/anychart-data-adapter.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="./ressources/img/favico.ico">
+    <script src = "./scrips/General/graph_generator.js"></script>
+    <script src = "./scrips/General/UI_functions.js"></script>
+    <script src = "./scrips/General/queue.js"></script>
+    <script src = "./scrips/Dijkstra/dijkstra.js"></script>
+    <script src = "./scrips/Astar/astar.js"></script>
+    <link rel="stylesheet" href="./style/stylesheet.css">
+
+    <title>Graph</title>
+</head>
+<body>
+    <header id = "header">
+        <h1><span class = "spechar">P</span>athfinding <span class = "spechar">A</span>lgorithms <span class = "spechar">V</span>isualisation</h1>
+    </header>
+    <div id = "meta-wrap">
+        <div id = "wrapper1">
+
+        </div>
+        <div id = "middle_text-1" class = "text_middle">
+            <button onclick = "clearText(container1)" id = "text-1" class = "text_hovercap">
+
+            </button>
+        </div>
+        <div id = "wrapper2">
+        </div>
+        <div id = "middle_text-2" class = "text_middle">
+            <button onclick = "clearText(container2)" id = "text-2" class = "text_hovercap">
+
+            </button>
+        </div>
+    </div>
+    <div id = "control_panel">
+        <script type="text/javascript">
+            const startAlgo = function () {
+
+                clearText();
+
+                Dijkstra(new Queue(graph.start), graph, container1)
+                .then((retrieve) => showSteps(retrieve[0], retrieve[1], container1));
+
+                Astar(new Queue(graph.start), graph, container2)
+                .then((retrieve) => showSteps(retrieve[0], retrieve[1], container2));
+            }
+
+            const showSteps = async function (steps, length, container){
+                await new Promise(res => setTimeout(res, 1000)); // Delay before reveal of performances.
+                container.style.transition = "500ms all ease";
+                container.style.filter = "blur(4px)";
+                if(container == container1){
+                    middle_text1.style.zIndex = "0";
+                    text1.innerHTML = "Completed in : <span class = 'spechar'>" + steps.toString() + "</span> steps."
+                    text1.innerHTML += "<br>Path length : <span class = 'spechar'>" + length.toString() + "</span>."
+                    middle_text1.style.opacity = 1.0;
+                } else {
+                    middle_text2.style.zIndex = "0";
+                    text2.innerHTML = "Completed in : <span class = 'spechar'>" + steps.toString() + "</span> steps."
+                    text2.innerHTML += "<br>Path length : <span class = 'spechar'>" + length.toString() + "</span>."
+                    middle_text2.style.opacity = 1.0;
+                }
+
+            }
+            const clearText = function (){
+                container1.style.filter = "none";
+                container1.style.transition = "none";
+
+                container2.style.filter = "none";
+                container2.style.transition = "none";
+
+                text1.innerHTML = ""
+                middle_text1.style.opacity = 0;
+                middle_text1.style.zIndex = "-1";
+                text2.innerHTML = ""
+                middle_text2.style.opacity = 0;
+                middle_text2.style.zIndex = "-1";
+                }
+        </script>
+        <a class = "git-link" href = "https://github.com/iptv-org/iptv" target="_blank">
+            <div class = "git-img"><img src="./ressources/img/Github_Mark.png" alt="Github Logo"></div>
+            <div class = "git-text"></div>
+        </a>
+        <div id = "change_button">
+            <button onclick="(function() {graph = init()})()"></button>
+        </div>
+        <div id = "start_button">
+            <button onclick="startAlgo()"></button>
+        </div>
+    </div>
+    <script type="text/javascript">
+
+        const container1 = document.getElementById("wrapper1");
+        const container2 = document.getElementById("wrapper2");
+
+        const middle_text1 = document.getElementById("middle_text-1");
+        const middle_text2 = document.getElementById("middle_text-2");
+
+        const text1 = document.getElementById("text-1");
+        const text2 = document.getElementById("text-2");
+
+
+        var graph = "";
+
+        const init = function () {
+            clearText();
+
+            var graph = new Graph();
+            graph.generate(graph.start, 10, 5, 1);
+            graph.randomizeLinks();
+            var data = graph.JSONify();
+            graph.plot(data, container1, "dijkstra");
+            graph.plot(data, container2, "astar");
+            return(graph);
+        }
+
+        graph = init();
+
+    </script>
+</body>
+</html>
